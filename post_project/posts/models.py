@@ -1,19 +1,22 @@
+
+
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
+						
+class Ownable (models.Model):
+    user = models.ForeignKey('auth.User', verbose_name=("Author"), related_name="%(class)s", on_delete=CASCADE)
+						
+    class Meta :
+        abstract = True
+						
+class RegisteredUser (models.Model):
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    tracking = models.ManyToManyField('self', related_name= 'tracked_by', blank= True, symmetrical= False )
+						
+class FeedItem (Ownable):
+    content = models.CharField("Content", max_length= 1000, blank= True, null= True)
+					
 
-class User(models.Model):
-    name = models.CharField(max_length=200)
-    email = models.EmailField
-
-
-class Post(models.Model):
-    title = models.CharField(max_length=100)
-    body = models.TextField(max_length=1500)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-class Followers(models.Model):
-    author = models.OneToOneField(User, on_delete=CASCADE)
-    followers = models.ManyToManyField(User, related_name="followers")
 
 
