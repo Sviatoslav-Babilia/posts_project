@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.admin.widgets import FilteredSelectMultiple
-from .models import User
+from django.forms import fields
+from .models import User, Post
 
 class UserChangeForm(forms.ModelForm):
     class Meta:
@@ -17,3 +18,10 @@ class UserChangeForm(forms.ModelForm):
             is_stacked=False
         )
     )
+
+class PostChangeForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'body')
+    author = forms.HiddenInput()
+

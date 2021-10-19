@@ -8,7 +8,7 @@ class User(AbstractUser):
     following = models.ManyToManyField('self', related_name='followers', blank=True, symmetrical=False)
     
     def __str__(self):
-        return str(self.get_full_name()) 
+        return str(self.username) 
 
 
 class Post(models.Model):
