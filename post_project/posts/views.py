@@ -13,16 +13,17 @@ class UserView(DetailView):
         # pdb.set_trace()
         return queryset
 
-
-        
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs['pk']
+        following = User.objects.all().exclude(pk=pk)        
         context['posts'] = Post.objects.all().filter(author=pk).order_by('title')
+        context['following'] = following
+        
         # import pdb;
         # pdb.set_trace()
         return context
+    
 
 
 
