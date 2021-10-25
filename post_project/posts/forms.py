@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.forms import fields
+from django.forms.widgets import ChoiceWidget, Select
 from .models import User, Post
 
 class UserChangeForm(forms.ModelForm):
@@ -23,5 +24,5 @@ class PostChangeForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'body')
-    author = forms.HiddenInput()
+    author = forms.ModelChoiceField(queryset=User.objects.all())
 
