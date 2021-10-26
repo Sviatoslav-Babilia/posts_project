@@ -16,7 +16,7 @@ class UserView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs['pk']
-        following = User.objects.all().exclude(pk=pk)        
+        following = User.objects.get(pk=pk).followers.all()     
         context['posts'] = Post.objects.all().filter(author=pk).order_by('title')
         context['following'] = following
         
