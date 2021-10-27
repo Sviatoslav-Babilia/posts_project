@@ -23,6 +23,22 @@ class UserView(DetailView):
         # import pdb;
         # pdb.set_trace()
         return context
+
+class AllPostsView(ListView):
+    template_name = "allposts.html"
+
+    def get_queryset(self):
+        queryset = Post.objects.all().order_by('title')
+        # import pdb;
+        # pdb.set_trace()
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.get_queryset()
+        # import pdb;
+        # pdb.set_trace()
+        return context
     
 
 

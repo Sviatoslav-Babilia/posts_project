@@ -6,16 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    Hallo human{{post.author}}!
+    <p>Hallo {{post.author}}!</p>
+    <p>Your blog list:</p>
     {% for post in posts %}
         <ul> 
             <li>title:{{post}}</li>
         </ul>
     {% endfor %}
-
+    <p>Followers:</p>
     {% for follow in following %}
         <ul> 
-            <li>{{follow}}</li>
+            <li><a href="{% url 'userpage' follow.pk %}" >{{follow}}</a></li>
         </ul>
     {% endfor %}
 
