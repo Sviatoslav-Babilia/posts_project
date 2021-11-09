@@ -12,7 +12,7 @@ class User(AbstractUser):
 
 
 class Post(models.Model):
-    author = ForeignKey(User, on_delete=CASCADE)
+    author = ForeignKey(User, related_name='posts', on_delete=CASCADE)
     title = models.CharField(max_length=100)
     body = models.TextField(max_length=1000)
 

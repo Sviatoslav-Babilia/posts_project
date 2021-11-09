@@ -14,11 +14,30 @@
         </ul>
     {% endfor %}
     <p>Followers:</p>
-    {% for follow in following %}
+
+
+    <!-- {% for follow in followers %}
         <ul> 
-            <li><a href="{% url 'userpage' follow.pk %}" >{{follow}}</a></li>
+            <li><a href="{% url 'userpage' follow.pk %}"> {{follow}} </a></li>
+            {% for post in follow.post_set.all %}
+                {{post.title}} 
+            {% endfor %}
+        </ul>
+    {% endfor %} -->
+
+
+    {% for follow in foll %}
+        <ul> 
+            <li><a href="{% url 'userpage' follow.pk %}"> {{follow}} </a></li>
+            {% for post in follow.posts.all %}
+                {{post.title}} 
+            {% endfor %}
         </ul>
     {% endfor %}
+
+
+
+
 
 
 </body>
