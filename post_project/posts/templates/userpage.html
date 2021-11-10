@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Hallo {{post.author}}!</p>
+    <p>Hallo {{user}}!</p>
     <p>Your blog list:</p>
     {% for post in posts %}
         <ul> 
-            <li>title:{{post}}</li>
+            <li>title:{{post.title}}</li>
         </ul>
     {% endfor %}
     <p>Followers:</p>
@@ -26,16 +26,23 @@
     {% endfor %} -->
 
 
-    {% for follow in foll %}
+    <!-- {% for follow in foll %}
         <ul> 
             <li><a href="{% url 'userpage' follow.pk %}"> {{follow}} </a></li>
             {% for post in follow.posts.all %}
                 {{post.title}} 
             {% endfor %}
         </ul>
+    {% endfor %} -->
+
+    {% for follower in followersposts %}
+        <ul> 
+            <li><a href="{% url 'userpage' follower.user.pk %}"> {{follower.user}} </a></li>
+            {% for post in follower.posts %}
+                {{post.title}} 
+            {% endfor %}
+        </ul>
     {% endfor %}
-
-
 
 
 
